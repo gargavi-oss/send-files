@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
+const API_BASE = import.meta.env.VITE_API_BASE;
+
+
 
 const FileUpload = ({ fileId }) => {
   const [file, setFile] = useState(null);
@@ -67,7 +70,7 @@ const FileUpload = ({ fileId }) => {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("/api/v1/file/upload", formData, {
+      const response = await axios.post(`${API_BASE}/v1/file/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -99,7 +102,7 @@ const FileUpload = ({ fileId }) => {
 
   const handleDownload = () => {
     if (!code.trim()) return alert("Enter a valid code");
-    window.location.href = `/api/v1/file/download/code/${code}`;
+    window.location.href = `${API_BASE}/v1/file/download/code/${code}`;
   };
 
   return (
