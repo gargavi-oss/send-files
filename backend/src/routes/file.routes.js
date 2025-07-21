@@ -6,10 +6,12 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import fs from "fs";
 import path from "path";
 import { ApiError } from "../utils/ApiError.js";
+import { sendEmail } from "../controllers/email.controller.js";
 
 const router = Router();
 
 router.post("/upload", upload.single("file"), getFile);
+router.post("/send-email", sendEmail);
 
 router.get("/download/id/:id", asyncHandler(async (req, res) => {
   const fileDoc = await File.findById(req.params.id);
