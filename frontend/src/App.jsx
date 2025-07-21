@@ -26,6 +26,7 @@ const FileUpload = () => {
         setQrCode(saved.qrCode);
         setUniqueCode(saved.uniqueCode);
         setTimeLeft(diff);
+        setFile(saved.file)
       } else {
         localStorage.removeItem("uploadData"); // expired
       }
@@ -112,8 +113,13 @@ const FileUpload = () => {
           qrCode,
           uniqueCode,
           expiresAt,
+          file: {
+            name: file.name,
+            type: file.type,
+            size: file.size,
+          },
         })
-      );
+      );      
     } catch (error) {
       console.error("Upload failed:", error);
     }
