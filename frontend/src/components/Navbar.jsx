@@ -19,8 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/70 shadow-md z-50 px-6 py-6 flex justify-between items-center backdrop-blur-md">
-
+    <nav className="fixed top-0 left-0 right-0 bg-white/70 shadow-md z-50 px-6 h-20 flex justify-between items-center backdrop-blur-md">
       <div className="text-2xl font-extrabold text-blue-600 tracking-wide">
         SendFiles
       </div>
@@ -28,19 +27,20 @@ const Navbar = () => {
       {isDesktop ? (
         <div className="flex space-x-10 mr-5 text-lg text-gray-700 font-medium">
           {navLinks.map((link) => (
-            <a
+            <motion.a
               key={link.name}
               href={link.href}
+              whileHover={{ scale: 1.05, paddingLeft: 10 }}
+              transition={{ duration: 0.2 }}
               className="hover:text-blue-600 transition-colors duration-200"
             >
               {link.name}
-            </a>
+            </motion.a>
           ))}
         </div>
       ) : (
-        
-        <div className="border-2 border-blue-600 rounded-lg p-0.5">
-          <Hamburger toggled={isOpen} toggle={setOpen} direction="right" />
+        <div className="border-2 border-blue-600 rounded-md p-0">
+          <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={24} />
         </div>
       )}
 
