@@ -14,6 +14,7 @@ const FileUpload = () => {
   const [uniqueCode, setUniqueCode] = useState("");
   const [timeLeft, setTimeLeft] = useState(null);
   const [code, setCode] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("uploadData"));
@@ -122,6 +123,26 @@ const FileUpload = () => {
     if (!code.trim()) return alert("Enter a valid code");
     window.location.href = `${API_BASE}/v1/file/download/code/${code}`;
   };
+  const handleSendEmail = async () => {
+    if (!email || !downloadLink) {
+      alert("Missing email or file link!");
+      return;
+    }
+  
+    try {
+      await axios.post(`${API_BASE}/v1/file/send-email`, {
+        email,
+        fileUrl: downloadLink,
+        code: uniqueCode,
+      });
+  
+      alert("Email sent successfully!");
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      alert("Failed to send email.");
+    }
+  };
+  
 
   return (
     <div className="p-5">
@@ -153,6 +174,20 @@ const FileUpload = () => {
     <p className="break-all text-blue-600">
       🔗 <a href={downloadLink} target="_blank" rel="noopener noreferrer">{downloadLink}</a>
     </p>
+
+    <input
+  type="email"
+  placeholder="Enter recipient email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  className="border p-2 mr-2"
+/>
+<button
+  onClick={handleSendEmail}
+  className="bg-purple-500 text-white px-4 py-2 rounded mt-2"
+>
+  Send Email
+</button>
 
     {qrCode && (
       <div className="mt-3">
