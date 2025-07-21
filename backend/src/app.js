@@ -11,7 +11,7 @@ app.use(cors(
 app.use("/temp", express.static("public/temp"));
 
 app.use(express.urlencoded({extended: true}))
-
+app.use(express.json())
 
 export {app}
 
