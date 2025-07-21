@@ -122,7 +122,7 @@ const FileUpload = ({ fileId }) => {
         </div>
       )}
 
-      {timeLeft !== null && (
+      {timeLeft && (
         <div
           style={{
             fontSize: "48px",
