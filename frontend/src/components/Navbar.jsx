@@ -19,8 +19,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/70 shadow-md z-50 px-6 h-20 flex justify-between items-center backdrop-blur-md">
-      <div className="text-2xl font-extrabold text-blue-600 tracking-wide">
+    <nav className="fixed top-0 left-0 right-0  bg-white/40 shadow-md z-50 px-6 h-20 flex justify-between items-center backdrop-blur-md">
+      <div className="text-3xl text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-blue-500 to-blue-800 tracking-wide">
         SendFiles
       </div>
 
@@ -51,7 +51,7 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: "100vw" }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="fixed top-20 left-0 right-0 z-40 w-full h-screen flex flex-col items-start gap-6 px-6 py-6 bg-white/90 backdrop-blur-md text-lg font-semibold"
+            className="fixed top-20 left-0 right-0 z-40 w-full h-screen flex flex-col items-start gap-6 px-6 py-6 bg-white/40 backdrop-blur-md text-lg font-semibold"
           >
             {navLinks.map((link) => (
               <motion.a
