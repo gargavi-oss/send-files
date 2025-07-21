@@ -9,7 +9,9 @@ export const sendEmail = async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      service: "Outlook",
+        host: "smtp.office365.com",
+        port: 587,
+        secure: false,
       auth: {
         user: process.env.OUTLOOK_USER,
         pass: process.env.OUTLOOK_PASS,
@@ -31,7 +33,8 @@ export const sendEmail = async (req, res) => {
 
     res.status(200).json({ message: "Email sent" });
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("Error sending email:", error.message, error.response?.body || error);
+
     res.status(500).json({ message: "Email failed to send" });
   }
 };
