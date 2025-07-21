@@ -33,7 +33,7 @@ const getFile = asyncHandler(async (req, res) => {
 
 
     return res.status(201).json(
-        new ApiResponse(200, {file,qrCode, downloadUrl: downloadLink,   uniqueCode: code, expiresAt: fileDoc.expiresAt,  }, "File uploaded successfully")
+        new ApiResponse(200, {file,qrCode, downloadUrl: downloadLink,   uniqueCode: code, expiresAt }, "File uploaded successfully")
     );
 });
 
