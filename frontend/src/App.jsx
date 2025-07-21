@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
+
+
 const API_BASE = import.meta.env.VITE_API_BASE;
 
 
 
-const FileUpload = ({ fileId }) => {
+const FileUpload = () => {
   const [file, setFile] = useState(null);
   const [downloadLink, setDownloadLink] = useState("");
   const [qrCode, setQrCode] = useState("");
