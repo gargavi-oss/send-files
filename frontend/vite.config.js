@@ -11,5 +11,5 @@ export default defineConfig({
     }
   
   },
-  base: process.env.VITE_BASE_PATH || "/portfolio-website",
+  base: process.env.VITE_BASE_PATH || "/send-files",
 })
