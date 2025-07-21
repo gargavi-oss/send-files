@@ -61,6 +61,22 @@ const FileUpload = () => {
     return `${mins}:${secs}`;
   };
 
+  const handleCancel = () => {
+    setTimeLeft(null);
+    setUniqueCode("");
+    setDownloadLink("");
+    setFile(null);
+    setCode("");
+    setQrCode("");
+  
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""; 
+    }
+  
+    localStorage.removeItem("uploadData"); 
+  };
+  
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -119,13 +135,33 @@ const FileUpload = () => {
           📦 Your download code: <strong>{uniqueCode}</strong>
         </div>
       )}
+    
+    {downloadLink && (
+  <div className="mt-6 p-4 rounded-lg bg-white">
+    <div className="flex border p-2 gap-2 shadow bg-gray-100 items-center mb-2">
+      <span className="font-semibold text-gray-700">
+        📄 File: {file?.name || "Unnamed"}
+      </span>
+      <button
+        onClick={handleCancel}
+        className="text-red-600 hover:underline text-sm"
+      >
+        Cancel
+      </button>
+    </div>
+    
+    <p className="break-all text-blue-600">
+      🔗 <a href={downloadLink} target="_blank" rel="noopener noreferrer">{downloadLink}</a>
+    </p>
 
-      {downloadLink && (
-        <div className="mt-4">
-          <p>🔗 <a href={downloadLink} target="_blank" rel="noopener noreferrer">{downloadLink}</a></p>
-          {qrCode && <img src={qrCode} alt="QR Code" className="mt-2 w-40" />}
-        </div>
-      )}
+    {qrCode && (
+      <div className="mt-3">
+        <img src={qrCode} alt="QR Code" className="w-40" />
+      </div>
+    )}
+  </div>
+)}
+
 
       {timeLeft && (
         <div
