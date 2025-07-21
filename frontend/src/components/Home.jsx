@@ -35,7 +35,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-20 px-4 sm:px-6 md:px-8 pt-24 bg-gradient-to-b from-white to-blue-50">
+    <div id='home' className="flex flex-col items-center justify-center min-h-screen py-20 px-4 sm:px-6 md:px-8 pt-24 bg-gradient-to-l from-white to-blue-50">
 
       <div className="w-full max-w-3xl text-center space-y-10">
      

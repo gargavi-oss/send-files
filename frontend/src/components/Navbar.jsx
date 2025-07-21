@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useMediaQuery } from "../customhooks/useMediaQuery";
 import Hamburger from "hamburger-react";
+import { HashLink } from "react-router-hash-link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { name: "Home", href: "#" },
-  { name: "Send", href: "#send" },
-  { name: "Receive", href: "#receive" },
-  { name: "About", href: "#about" },
+  { name: "Home", href: "/#home" },
+  { name: "Send", href: "/#send" },
+  { name: "Receive", href: "/#receive" },
+  { name: "About", href: "/#about" },
 ];
 
 const Navbar = () => {
@@ -19,31 +20,40 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0  bg-white/40 shadow-md z-50 px-6 h-20 flex justify-between items-center backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 bg-white/40 shadow-md z-50 px-6 h-20 flex justify-between items-center backdrop-blur-md">
+      {/* Logo */}
       <div className="text-3xl text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-blue-500 to-blue-800 tracking-wide">
         SendFiles
       </div>
 
+      {/* Desktop Navigation */}
       {isDesktop ? (
         <div className="flex space-x-10 mr-5 text-lg text-gray-700 font-medium">
           {navLinks.map((link) => (
-            <motion.a
+            <motion.div
               key={link.name}
-              href={link.href}
-              whileHover={{ scale: 1.05, paddingLeft: 10 }}
+              whileHover={{ scale: 1.05, x: 5 }}
               transition={{ duration: 0.2 }}
-              className="hover:text-blue-600 transition-colors duration-200"
             >
-              {link.name}
-            </motion.a>
+              <HashLink
+                to={link.href}
+                smooth
+                onClick={handleLinkClick}
+                className="hover:text-blue-600 transition-colors duration-200"
+              >
+                {link.name}
+              </HashLink>
+            </motion.div>
           ))}
         </div>
       ) : (
+        // Mobile Hamburger
         <div className="border-2 border-blue-600 rounded-md p-0">
           <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={24} />
         </div>
       )}
 
+      {/* Mobile Slide Menu */}
       <AnimatePresence>
         {!isDesktop && isOpen && (
           <motion.div
@@ -51,19 +61,23 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: "100vw" }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="fixed top-20 left-0 right-0 z-40 w-full h-screen flex flex-col items-start gap-6 px-6 py-6 bg-white/40 backdrop-blur-md text-lg font-semibold"
+            className="fixed top-20 left-0 right-0 bottom-0 z-40 w-full h-screen flex flex-col items-start gap-6 px-6 py-6 bg-white/40 backdrop-blur-md text-lg font-semibold"
           >
             {navLinks.map((link) => (
-              <motion.a
+              <motion.div
                 key={link.name}
-                href={link.href}
-                onClick={handleLinkClick}
-                whileHover={{ scale: 1.05, paddingLeft: 10 }}
+                whileHover={{ scale: 1.05, x: 10 }}
                 transition={{ duration: 0.2 }}
-                className="text-gray-800 hover:text-blue-600 transition-colors duration-200"
               >
-                {link.name}
-              </motion.a>
+                <HashLink
+                  to={link.href}
+                  smooth
+                  onClick={handleLinkClick}
+                  className="text-gray-800 hover:text-blue-600 transition-colors duration-200"
+                >
+                  {link.name}
+                </HashLink>
+              </motion.div>
             ))}
           </motion.div>
         )}
