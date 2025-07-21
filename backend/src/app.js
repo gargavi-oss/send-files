@@ -6,7 +6,7 @@ import "./cron.js";
 const app = express()
 
 app.use(cors(
-  {  orign: process.env.CORS_ORIGIN}
+  {  orign: process.env.CORS_ORIGIN || "https://send-files-xi.vercel.app"}
 ))
 app.use("/temp", express.static("public/temp"));
 
