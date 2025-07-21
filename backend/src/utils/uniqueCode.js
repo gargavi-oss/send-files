@@ -6,7 +6,7 @@ async function generateUniqueCode() {
   let exists = true;
 
   while (exists) {
-    code = nanoid(6);
+    code = nanoid(8);
     const existing = await File.findOne({ code });
     if (!existing) exists = false;
   }
