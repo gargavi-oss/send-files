@@ -7,8 +7,9 @@ export default defineConfig({
   plugins: [react(),tailwindcss()],
   server: {
     proxy: {
-      '/api': "http://localhost:8000"
+      '/api': "https://send-files-backend.onrender.com"
     }
   
-  }
+  },
+  base: process.env.VITE_BASE_PATH || "/portfolio-website",
 })
