@@ -10,7 +10,7 @@ async function generateUniqueCode() {
     const existing = await File.findOne({ code });
     if (!existing) exists = false;
   }
-
-  return code;
+  let upperCaseCode = code.toLocaleUpperCase()
+  return upperCaseCode;
 }
 export default generateUniqueCode
