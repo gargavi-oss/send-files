@@ -8,28 +8,31 @@ const API_BASE = import.meta.env.VITE_API_BASE;
 
 const Receive = () => {
   const [code, setCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
   const checkCode = async () => {
+    setLoading(true);
+    setErrorMsg("");
+
     try {
-        const response = await axios.post(`${API_BASE}/v1/file/upload`, formData, {
-            headers: { "Content-Type": "multipart/form-data" },
-          });
-    
+      const response = await axios.post(`${API_BASE}/v1/file/check`, { code });
 
       const { uniqueCode } = response.data.data;
 
       if (uniqueCode === code) {
         setTimeout(() => {
           navigate("/fileReceived");
-          window.location.reload(true);
-        }, 2000);
+        }, 1000);
       } else {
-        alert("❌ Invalid code. Please try again.");
+        setErrorMsg("❌ Invalid code. Please try again.");
       }
     } catch (err) {
       console.error(err);
-      alert("❌ Enter code again. Please try again.");
+      setErrorMsg("❌ Enter a valid code.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,13 +73,31 @@ const Receive = () => {
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
+
         <button
           onClick={checkCode}
-          className="px-6 py-3 text-lg font-semibold bg-white border-2 border-blue-600 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl transition duration-300 shadow-md hover:shadow-blue-300"
+          disabled={loading || !code.trim()}
+          className={`px-6 py-3 text-lg font-semibold border-2 rounded-xl transition duration-300 shadow-md
+            ${
+              loading
+                ? "bg-gray-300 text-gray-500 border-gray-300 cursor-not-allowed"
+                : "bg-white border-blue-600 text-blue-700 hover:bg-blue-600 hover:text-white hover:shadow-blue-300"
+            }
+          `}
         >
-          🗂️ Receive
+          {loading ? "🔍 Checking..." : "🗂️ Receive"}
         </button>
       </motion.div>
+
+      {errorMsg && (
+        <motion.p
+          className="mt-4 text-red-500 text-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          {errorMsg}
+        </motion.p>
+      )}
 
       <p className="mt-6 text-sm text-gray-500">
         💡 Don’t have a code?{" "}
