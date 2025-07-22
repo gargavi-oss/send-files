@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Home", href: "/#home", icon: "🏠"},
   { name: "Send", href: "/#send", icon: "📤" },
   { name: "Receive", href: "/#receive", icon: "🗂️" },
-  { name: "About", href: "/#about", icon: "📜" },
+  { name: "About", href: "/about", icon: "📜" },
 ];
 
 const Navbar = () => {

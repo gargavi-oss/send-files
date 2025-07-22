@@ -1,10 +1,20 @@
 import React from "react";
 import { HashLink } from "react-router-hash-link";
 import { Mail, Info, Send, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Bottom = () => {
+    const navigate = useNavigate()
+    const buttonFunction = () => {
+       
+        setTimeout(() => {
+          
+          navigate("/about");
+        }, 500);
+      };
+      
   return (
-    <footer className="bg-gradient-to-bl  from-blue-50 flex flex-col md:pl-30 justify-center items-center  to-white text-gray-800 shadow-inner ">
+    <footer className="bg-gradient-to-bl  from-blue-100 flex flex-col md:pl-30 justify-center items-center  to-white text-gray-800 shadow-inner ">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
        
         <div>
@@ -48,7 +58,8 @@ const Bottom = () => {
           <h3 className="text-md font-semibold mb-4 text-blue-900">Company</h3>
           <ul className="flex flex-col gap-3 text-sm">
             <li className="hover:text-blue-600 transition cursor-pointer flex items-center gap-2">
-              <Info className="w-4 h-4" /> About Us
+              <Info className="w-4 h-4" /> 
+              <span onClick={ buttonFunction}>About</span>
             </li>
           </ul>
         </div>
@@ -70,7 +81,7 @@ const Bottom = () => {
       </div>
 
       <div className="border-t border-gray-200 mt-4 py-5 text-center text-xs text-gray-500">
-        © 2025 <span className="font-semibold text-blue-700">SendFiles</span>. All rights reserved. Built with ❤️ for seamless transfer.
+        © 2025 <span className="font-semibold text-blue-700">SendFiles</span>. All rights reserved. Built with ❤️ by Avi for seamless transfer.
       </div>
     </footer>
   );

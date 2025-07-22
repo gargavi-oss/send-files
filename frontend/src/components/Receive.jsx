@@ -46,7 +46,7 @@ const Receive = () => {
   return (
     <div
       id="receive"
-      className="flex pb-5 flex-col items-center justify-center min-h-screen pt-14 px-4 sm:px-6 md:px-8 bg-gradient-to-l from-white to-blue-100"
+      className="flex pb-5 flex-col items-center justify-center min-h-screen pt-14 px-4 sm:px-6 md:px-8 bg-gradient-to-l from-white to-blue-200"
     >
       <motion.h2
         className="text-3xl sm:text-4xl font-bold text-center text-gray-700 mb-4"
