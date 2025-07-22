@@ -48,6 +48,7 @@ const FileUpload = () => {
             fileInputRef.current.value = "";
           }
         }
+        
         return updated;
       });
     }, 1000);

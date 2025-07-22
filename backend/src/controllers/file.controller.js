@@ -52,6 +52,9 @@ const getCode =  asyncHandler(async (req, res) => {
         id: fileDoc._id,
         name: fileDoc.name,
         expiresAt: fileDoc.expiresAt,
+        name: fileDoc.name,
+        file: fileDoc.file
+
       },
     });
   })
