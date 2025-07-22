@@ -25,11 +25,11 @@ const Receive = () => {
   
       console.log("Backend Response:", response.data);
   
-      const { file, downloadUrl, uniqueCode, qrCode, expiresAt } = response.data.data;
+      const { file, downloadUrl, uniqueCode, qrCode, expiresAt,name } = response.data.data;
   
       if (uniqueCode === code) {
         navigate("/fileReceived", {
-          state: { file, downloadUrl, uniqueCode, qrCode, expiresAt },
+          state: { file, downloadUrl, uniqueCode, qrCode, expiresAt,name },
         });
       } else {
         setErrorMsg("❌ Invalid code. Please try again.");

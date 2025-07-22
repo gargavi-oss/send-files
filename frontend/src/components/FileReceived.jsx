@@ -78,7 +78,7 @@ export default function FileReceived() {
         </div>
 
         <div className="text-sm sm:text-base space-y-2 text-gray-700">
-          <p><strong>📄 Name:</strong> {state.file?.name}</p>
+          <p><strong>📄 Name:</strong> {state.file?.name}{state.name}</p>
           <p><strong>🔑 Code:</strong> {state.uniqueCode}</p>
           <p className="break-words">
             <strong>🔗 Link:</strong>{" "}
