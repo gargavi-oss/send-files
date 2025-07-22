@@ -16,13 +16,18 @@ const Receive = () => {
   const checkCode = async () => {
     setLoading(true);
     setErrorMsg("");
-  
+    if (!code.trim()) {
+        toast.warning("Please enter a code before proceeding.", { position: "top-right" });
+        return;
+      }
+      
     try {
       const response = await axios.post(
         `${API_BASE}/v1/file/check`,
         { code },
         { headers: { "Content-Type": "application/json" } }
       );
+      toast.success("Code Matches",{position: "top-right"})
   
       console.log("Backend Response:", response.data);
   
@@ -32,13 +37,17 @@ const Receive = () => {
         navigate("/fileReceived", {
           state: { file, downloadUrl, uniqueCode, qrCode, expiresAt,name },
         });
-        toast.success("Code Matches",{position: "top-right"})
+        
       } else {
+        toast.error("Invalid code. Please try again.", { position: "top-right" });
+
         setErrorMsg("❌ Invalid code. Please try again.");
       }
     } catch (err) {
       console.error("Error checking code:", err?.response?.data || err.message);
       setErrorMsg("❌ Enter a valid code.");
+      toast.error("❌ Enter valid code.", { position: "top-right" });
+
     } finally {
       setLoading(false);
     }
@@ -50,7 +59,16 @@ const Receive = () => {
       id="receive"
       className="flex pb-5 flex-col items-center justify-center min-h-screen pt-14 px-4 sm:px-6 md:px-8 bg-gradient-to-l from-white to-blue-200"
     >
-        <ToastContainer/>
+        <ToastContainer
+  position="top-right"
+  autoClose={4000}
+  hideProgressBar={false}
+  newestOnTop={false}
+  closeOnClick
+  pauseOnHover
+  theme="light"
+/>
+
       <motion.h2
         className="text-3xl sm:text-4xl font-bold text-center text-gray-700 mb-4"
         initial={{ opacity: 0, y: -10 }}
