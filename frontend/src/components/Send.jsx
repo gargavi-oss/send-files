@@ -70,7 +70,7 @@ const Send = () => {
   return (
     <div
       id="send"
-      className="flex flex-col items-center justify-center h-auto px-4 sm:px-6 md:px-8 bg-gradient-to-l from-white to-blue-100 py-28"
+      className="flex flex-col items-center justify-center h-auto px-4 sm:px-6 md:px-8 bg-gradient-to-l from-white to-blue-100 pt-24"
     >
       <motion.h2
         initial={{ opacity: 0, y: -20 }}

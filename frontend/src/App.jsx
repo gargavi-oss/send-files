@@ -1,9 +1,10 @@
 import React from 'react'
-import FileUpload from './components/FileUpload'
+
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Send from './components/Send'
 import Receive from './components/Receive'
+import Bottom from './components/Bottom'
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
       <Home/>
       <Send/>
       <Receive/>
-      <FileUpload/>
+      <Bottom/>
     </div>
   )
 }

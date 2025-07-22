@@ -112,7 +112,7 @@ export default function FileReceived() {
           </div>
         )}
 
-        {/* Email Send Section */}
+     
         <div className="mt-6">
           <h2 className="text-lg font-semibold text-gray-700 mb-2">📤 Send this file via Email</h2>
           <div className="flex flex-col sm:flex-row gap-3">
