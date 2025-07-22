@@ -22,7 +22,7 @@ const Send = () => {
     e.preventDefault();
     setIsDragging(false);
     const droppedFile = e.dataTransfer.files[0];
-    if (!droppedFile) return alert("No file dropped!");
+    if (!droppedFile) return toast.error("No file dropped!",{position:"top-right"});
 
     setFile(droppedFile);
     setFileName(droppedFile.name);
@@ -61,7 +61,7 @@ const Send = () => {
         window.location.reload(true);
       }, 6000);
     } catch (err) {
-      toast.error("File not Uploaded",{position: 'top-left'})
+      toast.error("File not Uploaded",{position: 'top-right'})
       console.error("Upload error:", err);
     } finally {
       setFileUpload(false);

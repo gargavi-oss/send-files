@@ -3,6 +3,7 @@ import { HashLink } from "react-router-hash-link";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 
@@ -31,6 +32,7 @@ const Receive = () => {
         navigate("/fileReceived", {
           state: { file, downloadUrl, uniqueCode, qrCode, expiresAt,name },
         });
+        toast.success("Code Matches",{position: "top-right"})
       } else {
         setErrorMsg("❌ Invalid code. Please try again.");
       }
@@ -48,6 +50,7 @@ const Receive = () => {
       id="receive"
       className="flex pb-5 flex-col items-center justify-center min-h-screen pt-14 px-4 sm:px-6 md:px-8 bg-gradient-to-l from-white to-blue-200"
     >
+        <ToastContainer/>
       <motion.h2
         className="text-3xl sm:text-4xl font-bold text-center text-gray-700 mb-4"
         initial={{ opacity: 0, y: -10 }}
