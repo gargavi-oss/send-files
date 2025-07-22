@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getFile } from "../controllers/file.controller.js";
+import { getCode, getFile } from "../controllers/file.controller.js";
 import { upload } from "../middlewares/upload.middleware.js"
 import { File } from "../models/file.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -12,6 +12,7 @@ const router = Router();
 
 router.post("/upload", upload.single("file"), getFile);
 router.post("/send-email", sendEmail);
+router.post("/check", getCode)
 
 router.get("/download/id/:id", asyncHandler(async (req, res) => {
   const fileDoc = await File.findById(req.params.id);

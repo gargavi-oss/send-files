@@ -36,5 +36,24 @@ const getFile = asyncHandler(async (req, res) => {
         new ApiResponse(200, {file,qrCode, downloadUrl: downloadLink,   uniqueCode: code, expiresAt }, "File uploaded successfully")
     );
 });
+const getCode =  asyncHandler(async (req, res) => {
+    const { code } = req.body;
+    if (!code) throw new ApiError(400, "Code is required");
 
-export { getFile };
+    const fileDoc = await File.findOne({ code });
+
+    if (!fileDoc) throw new ApiError(404, "Invalid code");
+
+    res.status(200).json({
+      success: true,
+      message: "Code verified successfully",
+      data: {
+        uniqueCode: code,
+        id: fileDoc._id,
+        name: fileDoc.name,
+        expiresAt: fileDoc.expiresAt,
+      },
+    });
+  })
+
+export { getFile,getCode };

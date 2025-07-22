@@ -38,7 +38,7 @@ const Navbar = () => {
                 to={link.href}
                 smooth
                 onClick={handleLinkClick}
-                className="hover:text-blue-600 transition-colors duration-200"
+                className="hover:text-blue-600 transition-colors duration-200 font-sans"
               >
                 {link.name}
               </HashLink>
@@ -47,8 +47,8 @@ const Navbar = () => {
         </div>
       ) : (
        
-        <div className="border-2 border-blue-600 rounded-md p-0">
-          <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={24} />
+        <div className="border-2 border-blue-600 rounded-md ">
+          <Hamburger toggled={isOpen} toggle={setOpen} rounded direction="right" size={24} />
         </div>
       )}
 
