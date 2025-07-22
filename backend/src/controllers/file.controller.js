@@ -47,7 +47,7 @@ const getCode =  asyncHandler(async (req, res) => {
     const qrCode = await QRCode.toDataURL(downloadLink)
 
     return res.status(201).json(
-        new ApiResponse(200, {fileDoc,qrCode, downloadUrl: downloadLink,   uniqueCode: code, expiresAt }, "Code Verified sucessfully")
+        new ApiResponse(200, { file: fileDoc, qrCode, downloadUrl, uniqueCode: code, expiresAt }, "Code Verified successfully")
     );
   })
 
