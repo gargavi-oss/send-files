@@ -59,7 +59,7 @@ const Navbar = () => {
          initial={{ x: "100vw" }}
          animate={{ x: 0 }}
          exit={{ x: "100vw" }}
-         transition={{ duration: 0.4, ease: "easeInOut" }}
+         transition={{ duration: 0.6, ease: "easeInOut" }}
          className="absolute top-20 right-0 z-40 w-full  h-auto 
                     flex flex-col items-start gap-6 px-6 py-6
                     bg-gradient-to-br from-blue-100/70 via-white/80 to-blue-100/70

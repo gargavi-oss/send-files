@@ -71,7 +71,7 @@ const Send = () => {
   return (
     <div
       id="send"
-      className="flex flex-col items-center justify-center px-4 min-h-screen bg-gradient-to-br from-white via-blue-50 to-blue-100 pt-24"
+      className="flex pb-8 flex-col items-center justify-center px-4 min-h-screen bg-gradient-to-br from-white via-blue-50 to-blue-100 pt-24"
     >
  <div className="flex justify-end">   <ToastContainer /></div> 
       <motion.h2
