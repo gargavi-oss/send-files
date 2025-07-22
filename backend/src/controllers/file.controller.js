@@ -43,19 +43,25 @@ const getCode =  asyncHandler(async (req, res) => {
     const fileDoc = await File.findOne({ code });
 
     if (!fileDoc) throw new ApiError(404, "Invalid code");
+    const downloadLink = `${req.protocol}://${req.get("host")}/api/v1/file/download/id/${file._id}`;
+    const qrCode = await QRCode.toDataURL(downloadLink)
 
     res.status(200).json({
       success: true,
       message: "Code verified successfully",
       data: {
-        uniqueCode: code,
+        code: fileDoc.code,
         id: fileDoc._id,
         name: fileDoc.name,
         expiresAt: fileDoc.expiresAt,
-        name: fileDoc.name,
+       
         file: fileDoc.file
 
       },
+      downloadUrl: downloadLink,
+      qrCode,
+      uniqueCode: fileDoc.code
+
     });
   })
 
