@@ -57,7 +57,7 @@ const Receive = () => {
   return (
     <div
       id="receive"
-      className="flex pb-5  flex-col items-center justify-center min-h-screen pt-18 px-4 sm:px-6 md:px-8 bg-gradient-to-l from-white to-blue-200"
+      className="flex pb-5 pt-5  flex-col items-center justify-center min-h-screen  px-4 sm:px-6 md:px-8 bg-gradient-to-l from-white to-blue-200"
     >
         <ToastContainer
   position="top-right"

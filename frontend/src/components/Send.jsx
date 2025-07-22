@@ -93,7 +93,7 @@ const Send = () => {
         onDrop={handleDrop}
         onClick={handleClick}
         whileHover={{ scale: 1.01 }}
-        className={`w-full max-w-2xl border-2 border-dashed rounded-xl p-8 sm:p-12 text-center cursor-pointer shadow-lg backdrop-blur-md transition-all duration-300 ${
+        className={`w-full max-w-3xl border-4 hover:border-blue-400 border-dashed rounded-xl p-8 sm:p-12 text-center cursor-pointer shadow-lg backdrop-blur-md transition-all duration-300 ${
           isDragging
             ? "border-blue-500 bg-blue-100/30"
             : "border-gray-300 bg-white/70"
@@ -166,19 +166,19 @@ const Send = () => {
           ))}
         </motion.div>
 
-        <motion.ul
-          className="mt-8 space-y-2 text-sm text-gray-600"
+        <motion.div
+          className="mt-8 md:ml-10 max-w-xl flex-wrap gap-1 items-center justify-center flex flex-row space-y-1 text-sm text-gray-600"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          <li>✅ All file types supported</li>
-          <li>📏 Max size: 15MB</li>
-          <li>🔒 Encrypted upload</li>
-          <li>⚡️ Fast & responsive</li>
-          <li>🧨 Files auto-delete after 5 mins</li>
-          <li>📧 Email sharing via Nodemailer</li>
-        </motion.ul>
+          <li className="list-none">✅ All file types supported</li>
+          <li className="list-none">📏 Max size: 15MB</li>
+          <li className="list-none">🔒 Encrypted upload</li>
+          <li className="list-none">⚡️ Fast & responsive</li>
+          <li className="list-none">🧨 Files auto-delete after 5 mins</li>
+          <li className="list-none">📧 Email sharing via Nodemailer</li>
+        </motion.div>
       </motion.div>
     </div>
   );
