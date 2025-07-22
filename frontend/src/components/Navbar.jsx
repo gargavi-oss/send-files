@@ -21,12 +21,11 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/40 shadow-md z-50 px-6 h-20 flex justify-between items-center backdrop-blur-md">
-      {/* Logo */}
+    
       <div className="text-3xl text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-blue-500 to-blue-800 tracking-wide">
         SendFiles
       </div>
 
-      {/* Desktop Navigation */}
       {isDesktop ? (
         <div className="flex space-x-10 mr-5 text-lg text-gray-700 font-medium">
           {navLinks.map((link) => (
@@ -47,13 +46,13 @@ const Navbar = () => {
           ))}
         </div>
       ) : (
-        // Mobile Hamburger
+       
         <div className="border-2 border-blue-600 rounded-md p-0">
           <Hamburger toggled={isOpen} toggle={setOpen} direction="right" size={24} />
         </div>
       )}
 
-      {/* Mobile Slide Menu */}
+      
       <AnimatePresence>
         {!isDesktop && isOpen && (
           <motion.div

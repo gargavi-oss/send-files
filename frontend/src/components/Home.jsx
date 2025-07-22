@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { HashLink } from 'react-router-hash-link';
 
 const featureVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -35,7 +36,7 @@ const Home = () => {
   ];
 
   return (
-    <div id='home' className="flex flex-col items-center justify-center min-h-screen py-20 px-4 sm:px-6 md:px-8 pt-24 bg-gradient-to-l from-white to-blue-50">
+    <div id='home' className="flex flex-col items-center justify-center min-h-screen py-20 px-4 sm:px-6 md:px-8 pt-24 bg-gradient-to-l from-white to-blue-100  mt-10">
 
       <div className="w-full max-w-3xl text-center space-y-10">
      
@@ -53,7 +54,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-base sm:text-lg md:text-xl text-gray-700"
+          className="text-base sm:text-lg md:text-xl font-mono text-gray-700"
         >
           Upload, share, and manage your files with our secure, fast, and user-friendly platform.
         </motion.p>
@@ -64,18 +65,20 @@ const Home = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
           className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
-            href="#send"
-            className="w-full sm:w-auto text-center px-6 py-3 text-white text-lg font-semibold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl transition duration-300 shadow-lg hover:shadow-[0_0_20px_5px_rgba(59,130,246,0.6)]"
+          <HashLink
+            to="#send"
+            smooth
+            className="w-full sm:w-auto text-center px-6 py-3.5 text-white text-lg font-semibold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl transition duration-300 shadow-lg hover:shadow-[0_0_20px_5px_rgba(59,130,246,0.6)]"
           >
             🚀 Start Sharing Now
-          </a>
-          <a
-            href="#receive"
+          </HashLink>
+          <HashLink
+            to="#receive"
+            smooth
             className="w-full sm:w-auto text-center px-6 py-3 text-lg font-semibold bg-white border-2 border-blue-600 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl transition duration-300 shadow-md hover:shadow-[0_0_20px_5px_rgba(59,130,246,0.4)]"
           >
             🗂️ Receive Files
-          </a>
+          </HashLink>
         </motion.div>
 
         <motion.div
