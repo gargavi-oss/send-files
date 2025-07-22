@@ -15,26 +15,33 @@ const Receive = () => {
   const checkCode = async () => {
     setLoading(true);
     setErrorMsg("");
-
+  
     try {
-      const response = await axios.post(`${API_BASE}/v1/file/check`, { code });
-
-      const { uniqueCode } = response.data.data;
-
+      const response = await axios.post(
+        `${API_BASE}/v1/file/check`,
+        { code },
+        { headers: { "Content-Type": "application/json" } }
+      );
+  
+      console.log("Backend Response:", response.data);
+  
+      const { file, downloadUrl, uniqueCode, qrCode, expiresAt } = response.data.data;
+  
       if (uniqueCode === code) {
-        setTimeout(() => {
-          navigate("/fileReceived");
-        }, 1000);
+        navigate("/fileReceived", {
+          state: { file, downloadUrl, uniqueCode, qrCode, expiresAt },
+        });
       } else {
         setErrorMsg("❌ Invalid code. Please try again.");
       }
     } catch (err) {
-      console.error(err);
+      console.error("Error checking code:", err?.response?.data || err.message);
       setErrorMsg("❌ Enter a valid code.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div

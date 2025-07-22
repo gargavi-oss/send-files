@@ -50,16 +50,13 @@ const Send = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      localStorage.setItem("uploadData", JSON.stringify({
-        fileName: file.name,
-        fileSize: file.size,
-        fileType: file.type,
-        uploadedAt: new Date().toISOString(),
-      }));
+      const { file, downloadUrl, uniqueCode, expiresAt, qrCode } = response.data.data;
 
       console.log("Upload success:", response.data);
       setTimeout(() => {
-        navigate('/fileReceived');
+        navigate('/fileReceived',{
+          state: {file,downloadUrl,uniqueCode,qrCode,expiresAt}
+        });
         window.location.reload(true);
       }, 2000);
     } catch (err) {

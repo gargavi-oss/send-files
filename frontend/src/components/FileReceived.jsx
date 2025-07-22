@@ -1,57 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-const FileReceived = () => {
-  const [downloadLink, setDownloadLink] = useState("");
-  const [qrCode, setQrCode] = useState("");
-  const [uniqueCode, setUniqueCode] = useState("");
-  const [fileName, setFileName] = useState("");
-  const [fileSize, setFileSize] = useState("");
-  const [fileType, setFileType] = useState("");
-  const [timeLeft, setTimeLeft] = useState(null);
-  const [email, setEmail] = useState("");
-  const navigate = useNavigate();
-  const fileInputRef = useRef(null);
+export default function FileReceived() {
+  const { state } = useLocation();
+  const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("uploadData"));
-    if (saved) {
-      const now = Date.now();
-      const diff = Math.floor(new Date(saved.expiresAt).getTime() - now) / 1000;
-      if (diff > 0) {
-        setFileName(saved.fileName);
-        setFileSize(saved.fileSize);
-        setFileType(saved.fileType);
-        setDownloadLink(saved.downloadLink);
-        setQrCode(saved.qrCode);
-        setUniqueCode(saved.uniqueCode);
-        setTimeLeft(diff);
-      } else {
-        localStorage.removeItem("uploadData");
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    if (timeLeft === null || timeLeft <= 0) return;
+    if (!state?.expiresAt) return;
+    const expiryTime = new Date(state.expiresAt).getTime();
     const interval = setInterval(() => {
-      setTimeLeft((prev) => {
-        const updated = Math.max(0, prev - 1);
-        if (updated === 0) {
-          localStorage.removeItem("uploadData");
-          setDownloadLink("");
-          setQrCode("");
-          setUniqueCode("");
-          if (fileInputRef.current) {
-            fileInputRef.current.value = "";
-          }
-        }
-        return updated;
-      });
+      const diff = Math.max(0, Math.floor((expiryTime - Date.now()) / 1000));
+      setTimeLeft(diff);
     }, 1000);
     return () => clearInterval(interval);
-  }, [timeLeft]);
+  }, [state?.expiresAt]);
 
   const formatTime = (seconds) => {
     const mins = String(Math.floor(seconds / 60)).padStart(2, "0");
@@ -59,106 +21,29 @@ const FileReceived = () => {
     return `${mins}:${secs}`;
   };
 
-  const handleCancel = () => {
-    setTimeLeft(null);
-    setUniqueCode("");
-    setDownloadLink("");
-    setQrCode("");
-    localStorage.removeItem("uploadData");
-    setTimeout(() => {
-      navigate('/');
-      window.location.reload();
-    }, 1000);
-  };
-
-  const handleSendEmail = async () => {
-    if (!email) return alert("Please enter an email.");
-    try {
-      const response = await axios.post("/v1/file/send-email", {
-        email,
-        code: uniqueCode,
-        link: downloadLink,
-      });
-      alert("✅ Email sent successfully!");
-    } catch (err) {
-      alert("❌ Failed to send email.");
-      console.error(err);
-    }
-  };
+  if (!state) return <div className="p-10">❌ No file data found</div>;
 
   return (
-    <div
-      id="fileReceived"
-      className="flex flex-col items-center justify-center min-h-screen px-4 bg-gradient-to-tr from-white to-blue-100"
-    >
-      {uniqueCode && (
-        <div className="text-xl font-mono bg-blue-50 border border-blue-300 p-4 rounded-lg shadow-sm mb-6">
-          📦 Download Code: <strong>{uniqueCode}</strong>
+    <div className="max-w-xl mx-auto mt-10 p-5 border shadow rounded-xl bg-white">
+      <h2 className="text-xl font-bold mb-4">📦 File Received</h2>
+      <p><strong>Name:</strong> {state.file?.name}</p>
+      <p><strong>Code:</strong> {state.uniqueCode}</p>
+      <p className="break-words">
+        <strong>Download Link:</strong>{" "}
+        <a href={state.downloadUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+          {state.downloadUrl}
+        </a>
+      </p>
+      {state.qrCode && (
+        <div className="mt-4">
+          <img src={state.qrCode} alt="QR Code" className="w-40 mx-auto" />
         </div>
       )}
-
-      {downloadLink ? (
-        <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md text-center space-y-4">
-          <h2 className="text-2xl font-bold text-blue-700">File Info</h2>
-
-          <div className="text-left space-y-2">
-            <p><strong>📄 Name:</strong> {fileName}</p>
-            <p><strong>📦 Size:</strong> {(fileSize / 1024).toFixed(2)} KB</p>
-            <p><strong>📁 Type:</strong> {fileType}</p>
-          </div>
-
-          <a
-            href={downloadLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
-          >
-            ⬇️ Download File
-          </a>
-
-          {qrCode && (
-            <div className="mt-4">
-              <img src={qrCode} alt="QR Code" className="mx-auto w-40" />
-            </div>
-          )}
-
-          <div className="flex flex-col items-center mt-4">
-            <input
-              type="email"
-              placeholder="Enter recipient email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="border border-gray-300 p-2 rounded w-full mb-2"
-            />
-            <button
-              onClick={handleSendEmail}
-              className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
-            >
-              ✉️ Send Email
-            </button>
-          </div>
-
-          <button
-            onClick={handleCancel}
-            className="text-red-600 text-sm mt-4 hover:underline"
-          >
-            ❌ Cancel
-          </button>
-        </div>
-      ) : (
-        <div className="mt-4 text-gray-600">No file uploaded or code entered.</div>
-      )}
-
-      {timeLeft && (
-        <div className="text-center text-gray-800 mt-8">
-          <p className="text-lg mb-2">⏳ Link expires in:</p>
-          <div className="text-4xl font-mono bg-white border border-gray-300 px-6 py-2 rounded-xl shadow">
-            {timeLeft > 0 ? formatTime(timeLeft) : "Time's up!"}
-          </div>
-        </div>
+      {timeLeft > 0 && (
+        <p className="mt-6 text-center text-2xl text-red-600 font-mono">
+          ⏳ Expires in: {formatTime(timeLeft)}
+        </p>
       )}
     </div>
   );
-};
-
-export default FileReceived;
+}
