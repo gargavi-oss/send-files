@@ -36,7 +36,7 @@ const Home = () => {
   ];
 
   return (
-    <div id='home' className=" scroll-mt-24 flex flex-col items-center justify-center h-auto  px-4 sm:px-6 md:px-8 pt-20 py-25  bg-gradient-to-l from-white to-blue-200  mt-20">
+    <div id='home' className="  flex flex-col items-center justify-center h-auto  px-4 sm:px-6 md:px-8 pt-25 pb-26  bg-gradient-to-l from-white to-blue-200  mt-20">
 
       <div className="w-full max-w-3xl text-center space-y-10">
      
