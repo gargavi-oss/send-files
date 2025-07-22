@@ -25,14 +25,7 @@ const About = () => {
           </p>
         </div>
 
-        <div className="border border-gray-200 rounded-xl p-8 text-center shadow-md bg-white max-w-4xl mx-auto">
-          <Upload className="mx-auto w-10 h-10 text-blue-500 mb-4" />
-          <h2 className="text-2xl font-semibold text-cyan-600 mb-2">Our Mission</h2>
-          <p className="text-gray-600">
-            We believe file sharing should be simple, secure, and accessible to everyone. SendFiles eliminates the complexity of traditional file sharing methods by providing a streamlined experience that just works.
-          </p>
-        </div>
-
+     
         <motion.h2
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
