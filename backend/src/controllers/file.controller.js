@@ -37,51 +37,37 @@ const getFile = asyncHandler(async (req, res) => {
     );
 });
 const getCode = asyncHandler(async (req, res) => {
-    try {
-      const { code } = req.body;
+    const { code } = req.body;
   
-      console.log("Received code:", code); 
-  
-      if (!code) {
-        console.log("No code provided");
-        throw new ApiError(400, "Code is required");
-      }
-  
-      const fileDoc = await File.findOne({ code });
-  
-      if (!fileDoc) {
-        console.log("Code not found in DB");
-        throw new ApiError(404, "Invalid code");
-      }
-  
-    
-      if (new Date(fileDoc.expiresAt) < new Date()) {
-        console.log("Code expired");
-        throw new ApiError(410, "Code expired");
-      }
-  
-      console.log("File found:", fileDoc);
-      const downloadLink = `${req.protocol}://${req.get("host")}/api/v1/file/download/code/${code}`
-      const qrcode = await QRCode.toDataURL(downloadLink)
-  
-      return res.status(200).json({
-        success: true,
-        message: "Code verified successfully",
-        data: {
-          uniqueCode: code,
-          id: fileDoc._id,
-          name: fileDoc.name,
-          expiresAt: fileDoc.expiresAt,
-          qrCode: qrcode,
-          file: fileDoc.file,
-          downloadUrl: downloadLink
-        }
-      });
-  
-    } catch (error) {
-      console.error("Server error in getCode:", error); // 🔥 See the real problem
-      throw new ApiError(500, "Something went wrong while verifying the code");
+    if (!code) {
+      throw new ApiError(400, "Code is required");
     }
+  
+    const fileDoc = await File.findOne({ code });
+  
+    if (!fileDoc) {
+      throw new ApiError(404, "Invalid code");
+    }
+  
+    if (new Date(fileDoc.expiresAt) < new Date()) {
+      throw new ApiError(410, "Code expired");
+    }
+  
+    const downloadLink = `${req.protocol}://${req.get("host")}/api/v1/file/download/code/${code}`;
+    const qrcode = await QRCode.toDataURL(downloadLink);
+  
+    return res.status(200).json(
+      new ApiResponse(200, {
+        uniqueCode: code,
+        id: fileDoc._id,
+        name: fileDoc.name,
+        expiresAt: fileDoc.expiresAt,
+        file: fileDoc.file,
+        downloadUrl: downloadLink,   
+        qrCode: qrcode             
+      }, "Code verified successfully")
+    );
   });
+  
   
 export { getFile,getCode };
