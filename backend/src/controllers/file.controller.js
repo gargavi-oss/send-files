@@ -61,6 +61,8 @@ const getCode = asyncHandler(async (req, res) => {
       }
   
       console.log("File found:", fileDoc);
+      const downloadLink = `${req.protocol}://${req.get("host")}/api/v1/file/download/code/${code}`
+      const qrcode = await QRCode.toDataURL(downloadLink)
   
       return res.status(200).json({
         success: true,
@@ -70,8 +72,9 @@ const getCode = asyncHandler(async (req, res) => {
           id: fileDoc._id,
           name: fileDoc.name,
           expiresAt: fileDoc.expiresAt,
+          qrCode: qrcode,
           file: fileDoc.file,
-          downloadUrl: `${req.protocol}://${req.get("host")}/api/v1/file/download/code/${code}`
+          downloadUrl: downloadLink
         }
       });
   
