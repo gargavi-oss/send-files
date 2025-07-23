@@ -1,7 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import ThemeContext from "../context/ThemeContext";
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 
@@ -10,7 +11,7 @@ export default function FileReceived() {
   const [email, setEmail] = useState("");
   const [timeLeft, setTimeLeft] = useState(0);
   const navigate = useNavigate();
-
+const {theme} = useContext(ThemeContext)
   useEffect(() => {
     if (!state?.expiresAt) return;
     const expiryTime = new Date(state.expiresAt).getTime();

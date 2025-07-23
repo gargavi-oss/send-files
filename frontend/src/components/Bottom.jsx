@@ -1,87 +1,110 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HashLink } from "react-router-hash-link";
 import { Mail, Info, Send, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import ThemeContext from "../context/ThemeContext";
 
 const Bottom = () => {
-    const navigate = useNavigate()
-    const buttonFunction = () => {
-       
-        setTimeout(() => {
-          
-          navigate("/about");
-        }, 500);
-      };
-      
+  const { theme } = useContext(ThemeContext);
+  const navigate = useNavigate();
+
+  const buttonFunction = () => {
+    setTimeout(() => {
+      navigate("/about");
+    }, 500);
+  };
+
   return (
-    <footer className="bg-gradient-to-bl  from-blue-100 flex flex-col md:pl-30 justify-center items-center  to-white text-gray-800 shadow-inner ">
+    <footer
+      className={`transition-all duration-500 border-t ${
+        theme === "light"
+          ? "bg-gradient-to-bl from-blue-100 to-white text-gray-800 border-gray-300"
+          : "bg-gradient-to-bl from-[#0f0f0f] to-[#1f1f1f] text-gray-300 border-gray-700"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-       
         <div>
-          <h2 className="text-xl font-bold flex items-center gap-2 text-blue-700">
+          <h2
+            className={`text-xl font-bold flex items-center gap-2 ${
+              theme === "light" ? "text-blue-700" : "text-red-400"
+            }`}
+          >
             🌐 SendFiles
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-gray-600">
+          <p className="mt-3 text-sm leading-relaxed">
             The most secure and fastest way to share your files online — easy, encrypted, and reliable.
           </p>
         </div>
 
         <div>
-          <h3 className="text-md font-semibold mb-4 text-blue-900">Product</h3>
+          <h3 className="text-md font-semibold mb-4">Product</h3>
           <nav className="flex flex-col gap-3 text-sm">
             <HashLink
               to="/#home"
               smooth
-              className="flex items-center gap-2 hover:text-blue-600 transition"
+              className="flex items-center gap-2 hover:underline hover:text-blue-500"
             >
               <Home className="w-4 h-4" /> Home
             </HashLink>
             <HashLink
               to="/#send"
               smooth
-              className="flex items-center gap-2 hover:text-blue-600 transition"
+              className="flex items-center gap-2 hover:underline hover:text-blue-500"
             >
               <Send className="w-4 h-4" /> Send
             </HashLink>
             <HashLink
               to="/#receive"
               smooth
-              className="flex items-center gap-2 hover:text-blue-600 transition"
+              className="flex items-center gap-2 hover:underline hover:text-blue-500"
             >
               📥 Receive
             </HashLink>
           </nav>
         </div>
 
-      
         <div>
-          <h3 className="text-md font-semibold mb-4 text-blue-900">Company</h3>
+          <h3 className="text-md font-semibold mb-4">Company</h3>
           <ul className="flex flex-col gap-3 text-sm">
-            <li className="hover:text-blue-600 transition cursor-pointer flex items-center gap-2">
-              <Info className="w-4 h-4" /> 
-              <span onClick={ buttonFunction}>About</span>
+            <li
+              onClick={buttonFunction}
+              className="cursor-pointer flex items-center gap-2 hover:underline hover:text-blue-500"
+            >
+              <Info className="w-4 h-4" />
+              <span>About</span>
             </li>
           </ul>
         </div>
 
         <div>
-          <h3 className="text-md font-semibold mb-4 text-blue-900">Support</h3>
+          <h3 className="text-md font-semibold mb-4">Support</h3>
           <ul className="flex flex-col gap-3 text-sm">
-          <a
-  href="https://mail.google.com/mail/?view=cm&fs=1&to=avigarg245@gmail.com"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="hover:text-blue-600 transition cursor-pointer flex items-center gap-2"
->
-  <Mail className="w-4 h-4" /> Contact Us
-</a>
-
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=avigarg245@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline hover:text-blue-500 flex items-center gap-2"
+            >
+              <Mail className="w-4 h-4" /> Contact Us
+            </a>
           </ul>
         </div>
       </div>
 
-      <div className="border-t border-gray-200 mt-4 py-5 text-center text-xs text-gray-500">
-        © 2025 <span className="font-semibold text-blue-700">SendFiles</span>. All rights reserved. Built with ❤️ by Avi for seamless transfer.
+      <div
+        className={`py-5 text-center text-xs ${
+          theme === "light" ? "text-gray-500" : "text-gray-400"
+        }`}
+      >
+        © 2025{" "}
+        <span
+          className={`font-semibold ${
+            theme === "light" ? "text-blue-700" : "text-red-400"
+          }`}
+        >
+          SendFiles
+        </span>
+        . All rights reserved. Built with ❤️ by Avi for seamless transfer.
       </div>
     </footer>
   );
