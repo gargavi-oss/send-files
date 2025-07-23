@@ -125,7 +125,7 @@ const Send = () => {
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ duration: 2 }}
-              className="h-1 bg-blue-500 rounded-full mt-4"
+              className={`h-1 ${theme==='light'? 'bg-gradient-to-tl from-blue-400 to-blue-600':'bg-gradient-to-tl from-red-400 to-pink-500'}   rounded-full mt-4`}
             />
           </>
         ) : file ? (
