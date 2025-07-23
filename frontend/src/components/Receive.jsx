@@ -76,7 +76,7 @@ const Receive = () => {
   return (
     <div
       id="receive"
-      className={`flex pb-5  flex-col items-center justify-center md:pt-0 pt-4 min-h-screen px-4 sm:px-6 md:px-8 transition-all duration-500 ${
+      className={`flex pb-5  flex-col items-center justify-center md:pt-0 pt-2 min-h-screen px-4 sm:px-6 md:px-8 transition-all duration-500 ${
         theme === "light"
           ? "bg-gradient-to-l from-white to-blue-200"
           : "bg-gradient-to-l from-[#0f0f0f] to-[#1f1f1f]"
@@ -85,7 +85,7 @@ const Receive = () => {
       <ToastContainer position="top-right" autoClose={4000} theme={theme === "light" ? "light" : "dark"} />
 
       <motion.div
-        className={`text-3xl sm:text-5xl font-bold text-center mb-4 text-transparent bg-clip-text ${
+        className={`text-5xl sm:text-5xl font-bold text-center mb-4 text-transparent bg-clip-text ${
           theme === "light" ? "bg-gradient-to-tl from-blue-500 to-blue-800" : "bg-gradient-to-tl from-red-400 to-pink-300"
         }`}
         initial={{ opacity: 0, y: -10 }}

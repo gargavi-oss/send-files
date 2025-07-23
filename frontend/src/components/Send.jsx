@@ -83,7 +83,7 @@ const Send = () => {
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className={`text-4xl font-extrabold text-center mb-10 ${
+        className={`text-5xl font-extrabold text-center mb-10 ${
           theme === 'light'
             ? 'text-blue-800'
             : 'bg-gradient-to-r from-pink-400 to-red-500 bg-clip-text text-transparent'
