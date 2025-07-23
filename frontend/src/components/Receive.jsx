@@ -29,7 +29,7 @@ const Receive = () => {
         { code },
         { headers: { "Content-Type": "application/json" } }
       );
-      toast.success("Code Matches",{position: "top-right"})
+     
   
       console.log("Backend Response:", response.data);
   
@@ -39,6 +39,7 @@ const Receive = () => {
         navigate("/fileReceived", {
           state: { file, downloadUrl, uniqueCode, qrCode, expiresAt,name },
         });
+        toast.success("Code Matches",{position: "top-right"})
         
       } else {
         toast.error("Invalid code. Please try again.", { position: "top-right" });
