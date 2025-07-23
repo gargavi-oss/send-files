@@ -48,7 +48,7 @@ SendFiles is a modern, fast, and minimal file sharing application built with the
 
 | Light Mode | Dark Mode |
 | ---------- | --------- |
-|            |           |
+| ![Light](./screenshots/light.png)|![Dark](./screenshots/dark.png)           |
 
 *You can add more screenshots for upload, receive, and QR view.*
 
