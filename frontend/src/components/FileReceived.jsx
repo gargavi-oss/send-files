@@ -116,7 +116,7 @@ export default function FileReceived() {
             <strong>📄 Name:</strong> {state.file?.name || state.name}
           </p>
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 mt-3">
-  <label htmlFor="myCode" className="font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+  <label htmlFor="myCode" className={`font-semibold ${theme==='light'?'text-gray-700':'text-gray-300'}flex items-center gap-2`}>
     🔑 Code:
   </label>
   <div className="flex flex-1 gap-2">
@@ -128,7 +128,7 @@ export default function FileReceived() {
       tabIndex={-1}
       
       style={{ width: `${state.uniqueCode.length + 1}ch` }}
-      className="flex-1 px-4 py-2  rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#1f1f1f] text-gray-800 dark:text-white shadow-sm focus:outline-none pointer-events-none cursor-default"
+      className={`flex-1 px-4 py-2  rounded-lg border border-gray-300 dark:border-gray-600 ${theme==='light'?'bg-white text-gray-800': 'bg-[#1f1f1f] text-white'}   shadow-sm focus:outline-none pointer-events-none cursor-default `}
     />
     <button
       onClick={copyFunction}

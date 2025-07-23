@@ -8,7 +8,7 @@ import Bottom from './components/Bottom'
 import {Helmet} from "react-helmet"
 import ThemeContext from './context/ThemeContext'
 const App = () => {
-  const {theme} = useContext(ThemeContext)
+ 
   return (
     <div>
 
