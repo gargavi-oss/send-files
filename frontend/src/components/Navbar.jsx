@@ -72,7 +72,7 @@ const Navbar = () => {
         <ThemeButton />
       </div>
     ) : (
-      <div className="border-2 border-blue-600 rounded-md">
+      <div className={`border-2 ${theme==='light'? "border-blue-600":"border-red-600"}  rounded-md`}>
         <Hamburger
           toggled={isOpen}
           color={theme === "light" ? "#333" : "#fff"}
