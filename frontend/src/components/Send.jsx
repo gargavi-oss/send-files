@@ -59,7 +59,7 @@ const Send = () => {
           state: { file, downloadUrl, uniqueCode, qrCode, expiresAt },
         });
         window.location.reload(true);
-      }, 6000);
+      }, 3000);
     } catch (err) {
       toast.error("File not uploaded", { position: 'top-right' });
       console.error("Upload error:", err);
