@@ -71,14 +71,14 @@ SendFiles is a modern, fast, and minimal file sharing application built with the
 https://github.com/gargavi-oss/send-files.git
 
 # Install backend dependencies
-cd send-files
+cd backend
 npm install
 
 # Start backend server
-npm run server
+npm run start
 
 # Install frontend dependencies
-cd client
+cd frontend
 npm install
 
 # Start frontend
