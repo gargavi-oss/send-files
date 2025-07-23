@@ -36,13 +36,13 @@ const Navbar = () => {
     }`}
   >
     <div
-      className={`text-4xl text-transparent bg-clip-text font-extrabold tracking-wide ${
+      className={`text-4xl text-transparent bg-clip-text font-extrabold cursor-pointer tracking-wide ${
         theme === "light"
           ? "bg-gradient-to-r from-blue-500 to-blue-800"
           : "bg-gradient-to-r from-red-500 to-pink-300"
       }`}
     >
-      SendFiles
+     <HashLink smooth to="/#home">SendFiles</HashLink> 
     </div>
 
     {isDesktop ? (
